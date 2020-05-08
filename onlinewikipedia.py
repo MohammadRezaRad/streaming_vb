@@ -82,7 +82,7 @@ def main():
     Analyzes specified documents.
     """
     options = parse_args()
-    print options
+    print (options)
 
     # we assume there exist three files: 
     # a vocab file (corpus_vocab.dat)
@@ -199,7 +199,7 @@ def main():
         else:
             minNumPtsPerEval = int(trueD / 1000)
 
-    print "Using algorithm: " + str(alg)
+    print ("Using algorithm: " + str(alg))
     recordedData = []
     totalTime = 0.0
     totalDownloadingTime = 0.0
@@ -221,7 +221,7 @@ def main():
             start = time.time()
             (perplex, split) = evaluation.evaluate(validation_docs, alg_alpha, alg_lam, options.usePtEst)
             testTime = time.time() - start
-            print str(iteration+1) + "/" + str(iters) + " " + str(alg) + " (%g, %g): held-out perplexity estimate = %f, %f" % (iter_time, testTime, perplex, split)
+            print (str(iteration+1) + "/" + str(iters) + " " + str(alg) + " (%g, %g): held-out perplexity estimate = %f, %f" % (iter_time, testTime, perplex, split))
             recordedData += [((iteration+1)*batchsize, totalTime, totalDownloadingTime, perplex, split)]  # also save perplexity now!
             if (algorithmname in ["hbb", "filtering", "filtering_ep", "filtering_ep2"]):
     	        outfile = corpus + "_" + str(alg) + "_" + str(batchsize) + "_eta" + str(eta)  # need to distinguish eta now
@@ -233,7 +233,7 @@ def main():
 				# double the number of points to the next evaluation
     	        minNumPtsPerEval = minNumPtsPerEval * 2
         else:
-            print str(iteration+1) + "/" + str(iters) + " " + str(alg) + " (%g)" % (iter_time)
+            print (str(iteration+1) + "/" + str(iters) + " " + str(alg) + " (%g)" % (iter_time))
 
         if (iteration == iters-1):
             # save final lambda matrix
@@ -249,7 +249,7 @@ def main():
             if (options.async):
                 alg.shutdown()
 
-    print "DONE!"
+    print ("DONE!")
 
 if __name__ == '__main__':
     main()

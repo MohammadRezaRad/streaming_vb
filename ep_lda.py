@@ -114,7 +114,7 @@ class EP_LDA:
                 # print "\tBatchEP converged in " + str(iteration+1) + " iterations, delta = " + str(delta) + " (thr = " + str(thr) + ", avg_lambda = " + str(np.mean(self._lambda)) + ", avg_gamma = " + str(np.mean(self._gamma)) + ")" 
                 break
             if iteration >= maxiters - 1:
-                print "\tBatchEP did not converge after " + str(iteration+1) + " iterations, delta = " + str(delta) + " (thr = " + str(thr) + ", avg_lambda = " + str(np.mean(self._lambda)) + ", avg_gamma = " + str(np.mean(self._gamma)) + ")"
+                print ("\tBatchEP did not converge after " + str(iteration+1) + " iterations, delta = " + str(delta) + " (thr = " + str(thr) + ", avg_lambda = " + str(np.mean(self._lambda)) + ", avg_gamma = " + str(np.mean(self._gamma)) + ")")
         return self._lambda
 
 
@@ -139,7 +139,7 @@ class EP_LDA:
 
                 # If some components of rho_d or tau_k are non-positive, skip this step
                 if (rho_d.min() <= 0 or tau.min() <= 0):
-                    print "\t\tSkipped (d,n) = (" + str(d) + "," + str(n) + "): min(rho_d) = " + str(rho_d.min()) + ", min(tau) = " + str(tau.min())
+                    print ("\t\tSkipped (d,n) = (" + str(d) + "," + str(n) + "): min(rho_d) = " + str(rho_d.min()) + ", min(tau) = " + str(tau.min()))
                     continue
 
                 # Compute \sum_k \rho_dk and \sum_v \tau_kv, for 1 <= k <= K

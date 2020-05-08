@@ -84,7 +84,7 @@ class BatchLDA:
                 # print "\tBatchVB converged in " + str(iteration+1) + "/" + str(maxiters) + " iterations, change: " + str(change) + ", thr: " + str(thr)
                 break
             if iteration >= maxiters - 1:
-                print "\tBatchVB did not converge after " + str(maxiters) + " iterations, change: " + str(change) + ", thr: " + str(thr)
+                print ("\tBatchVB did not converge after " + str(maxiters) + " iterations, change: " + str(change) + ", thr: " + str(thr))
             oldB = newB
         return self._lambda
 

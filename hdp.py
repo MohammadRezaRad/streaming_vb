@@ -5,7 +5,7 @@
 import numpy as np
 import scipy.special as sp
 import os, sys, math, time
-from itertools import izip
+#from itertools import izip
 import random
 
 meanchangethresh = 0.00001
@@ -168,7 +168,7 @@ class hdp:
             old_likelihood = likelihood
 
             if converge < 0:
-                print "warning, likelihood is decreasing!"
+                print ("warning, likelihood is decreasing!")
             
             iter += 1
             
@@ -179,7 +179,7 @@ class hdp:
         return(likelihood)
 
     def optimal_ordering(self, ss):
-        s = [(a, b) for (a,b) in izip(ss.m_var_sticks_ss, range(self.m_T))]
+        s = [(a, b) for (a,b) in zip(ss.m_var_sticks_ss, range(self.m_T))]
         x = sorted(s, key=lambda y: y[0], reverse=True)
         idx = [y[1] for y in x]
         ss.m_var_sticks_ss[:] = ss.m_var_sticks_ss[idx]
@@ -198,8 +198,8 @@ class hdp:
     def seed_init(self):
         n = self._D
         ids = random.sample(range(n), self.m_T) 
-        print "seeding with docs %s" % (' '.join([str(id) for id in ids]))
-        for (id, t) in izip(ids, range(self.m_T)):
+        print ("seeding with docs %s" % (' '.join([str(id) for id in ids])))
+        for (id, t) in zip(ids, range(self.m_T)):
             doc = self._docs[id]
             self.m_beta[t] = np.random.gamma(1, 1, self.m_size_vocab) 
             self.m_beta[t,doc[0]] += doc[1]
@@ -243,7 +243,7 @@ class hdp:
     def train(self, iters, thr):
         oldB = self.em(1E-4,True)
         for i in range(iters-1):
-            print i,oldB
+            print (i,oldB)
             newB = self.em(1E-4,False)
             if (newB - oldB < thr):
                 return

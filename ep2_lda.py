@@ -119,8 +119,8 @@ class EP2_LDA:
                 # print ""
                 break
             if iteration >= maxiters - 1:
-                print "Batch EP2 did not converge after " + str(iteration+1) + " iterations, delta = " + str(delta) + " (thr = " + str(thr) + ", avg_lambda = " + str(np.mean(self._lambda)) + ", avg_gamma = " + str(np.mean(self._gamma)) + ")"
-                print ""
+                print ("Batch EP2 did not converge after " + str(iteration+1) + " iterations, delta = " + str(delta) + " (thr = " + str(thr) + ", avg_lambda = " + str(np.mean(self._lambda)) + ", avg_gamma = " + str(np.mean(self._gamma)) + ")")
+                print ("")
         return self._lambda
 
 
@@ -143,7 +143,7 @@ class EP2_LDA:
 
                 # If some components of rho_d or tau_k are non-positive, skip this step
                 if (rho_d.min() <= 0 or tau.min() <= 0):
-                    print "\t\tSkipped (d,v) = (" + str(d) + "," + str(v) + "): min(rho_d) = " + str(rho_d.min()) + ", min(tau) = " + str(tau.min())
+                    print ("\t\tSkipped (d,v) = (" + str(d) + "," + str(v) + "): min(rho_d) = " + str(rho_d.min()) + ", min(tau) = " + str(tau.min()))
                     continue
 
                 # Compute \sum_k \rho_dk and \sum_w \tau_kw, for 1 <= k <= K

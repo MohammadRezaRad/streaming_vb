@@ -131,5 +131,5 @@ def dirichlet_mle_newton(e_p, e_p2, e_logp, maxiters = 20, thr = 1e-4, silent = 
         if iteration >= maxiters - 1:
             cur_gap = psi(alpha) - psi(sum(alpha)) - e_logp
             if not silent:
-                print "Dirichlet-MLE-Newton did not converge after " + str(iteration) + " iterations, gap = " + str(cur_gap)
+                print ("Dirichlet-MLE-Newton did not converge after " + str(iteration) + " iterations, gap = " + str(cur_gap))
     return alpha

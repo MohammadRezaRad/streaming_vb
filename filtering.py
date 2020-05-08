@@ -22,8 +22,8 @@
 # If not, see <http://www.gnu.org/licenses/>.
 
 
-import cPickle, string, numpy, getopt, sys, random, time, re, pprint
-
+import string, numpy, getopt, sys, random, time, re, pprint
+import _pickle as cPickle
 import onlineldavb, batchvb, ep_lda, hdp, ep2_lda
 #import wikirandom
 import copy, math

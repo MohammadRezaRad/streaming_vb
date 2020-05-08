@@ -21,8 +21,8 @@
 # Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-import cPickle, string, numpy, getopt, sys, random, time, re, pprint
-
+import string, numpy, getopt, sys, random, time, re, pprint
+import _pickle as cPickle
 import onlineldavb, batchvb, ep_lda, ep2_lda
 #import wikirandom
 import copy,math
@@ -31,19 +31,19 @@ from multiprocessing import Pool, cpu_count
 def chunk(l, n):
     return [l[i:i+n] for i in range(0, len(l), n)]
 
-def runBatchVB((W, K, docs, alpha, lam, maxiters,thr,hbb)):
+def runBatchVB(W, K, docs, alpha, lam, maxiters,thr,hbb):
         batchVB = batchvb.BatchLDA(W, K, docs, alpha, lam, useHBBBound = hbb)
         lam = batchVB.train(maxiters, thr)
         return lam
 
 # For ParallelFilteringEP
-def runBatchEP((W, K, docs, alpha, lam, maxiters, threshold, useNewton)):
+def runBatchEP(W, K, docs, alpha, lam, maxiters, threshold, useNewton):
         ep = ep_lda.EP_LDA(W, K, docs, alpha, lam, useNewton)
         lam = ep.train(maxiters, threshold)
         return lam
 
 # For ParallelFilteringEP2
-def runBatchEP2((W, K, docs, alpha, lam, maxiters, threshold, useNewton)):
+def runBatchEP2(W, K, docs, alpha, lam, maxiters, threshold, useNewton):
         ep2 = ep2_lda.EP2_LDA(W, K, docs, alpha, lam, useNewton)
         lam = ep2.train(maxiters, threshold)
         return lam

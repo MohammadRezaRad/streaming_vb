@@ -21,7 +21,8 @@
 # Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-import cPickle, string, getopt, sys, random, time, re, pprint
+import string, getopt, sys, random, time, re, pprint
+import _pickle as cPickle
 import numpy as np
 import onlineldavb, batchvb
 #import wikirandom
@@ -74,7 +75,7 @@ def evaluateLambda(docs, lda_alpha, lam):
   return (test_score / numwords, test_score_split / c_test_word_count_split)
 
 
-def lda_e_step((words, counts), alpha, k, Elogbeta, max_iter=100):
+def lda_e_step(words, counts, alpha, k, Elogbeta, max_iter=100):
     gamma = np.ones(k)  
     expElogtheta = np.exp(dirichlet_expectation(gamma)) 
     expElogbeta = Elogbeta[:, words]
@@ -100,7 +101,7 @@ def lda_e_step((words, counts), alpha, k, Elogbeta, max_iter=100):
     return (likelihood, gamma)
 
 
-def lda_e_step_full((words, counts), alpha, k, lam, max_iter=100):
+def lda_e_step_full(words, counts, alpha, k, lam, max_iter=100):
     gamma = np.ones(k)  
     expElogtheta = np.exp(dirichlet_expectation(gamma)) 
     expElogbeta = np.exp(dirichlet_expectation(lam))[:, words]
@@ -126,7 +127,7 @@ def lda_e_step_full((words, counts), alpha, k, lam, max_iter=100):
     return (likelihood, gamma)
 
 
-def lda_e_step_split((words, counts), alpha, k, beta, max_iter=100):
+def lda_e_step_split(words, counts, alpha, k, beta, max_iter=100):
     length = len(words)
     half_len = int(len(words) / 2) + 1
     idx_train = [2*i for i in range(half_len) if 2*i < length]
@@ -165,7 +166,7 @@ def lda_e_step_split((words, counts), alpha, k, beta, max_iter=100):
 
 
 
-def lda_e_step_split_full((words, counts), alpha, k, lam, max_iter=100):
+def lda_e_step_split_full(words, counts, alpha, k, lam, max_iter=100):
     length = len(words)
     half_len = int(len(words) / 2) + 1
     idx_train = [2*i for i in range(half_len) if 2*i < length]

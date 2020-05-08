@@ -53,7 +53,7 @@ def runBatchEP(workQueue, lockingPost):
         lockingPost.increment(ss)
         workQueue.task_done()
         count += 1
-        print "\tdone " + str(count)
+        print ("\tdone " + str(count))
 
 
 def runBatchEP2(workQueue, lockingPost):
@@ -69,7 +69,7 @@ def runBatchEP2(workQueue, lockingPost):
         lockingPost.increment(ss)
         workQueue.task_done()
         count += 1
-        print "\tdone " + str(count)
+        print ("\tdone " + str(count))
 
 
 def chunk(l, n):

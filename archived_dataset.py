@@ -26,14 +26,14 @@ import numpy as n
 
 def loadDocs(path):
     #do this using memory-mapped io. faster? think so.
-    print "Loading docs ..."
+    print ("Loading docs ...")
     #get number of lines 
     numLines = 0
     with open(path, "r+b") as f:
         m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
         while(m.readline() != ''):
             numLines += 1
-    print str(numLines) +" docs to load."
+    print (str(numLines) +" docs to load.")
     docs = numLines *[None]
     #read the docs in
     with open(path, "r+b") as f:
@@ -53,7 +53,7 @@ def loadDocs(path):
             #print 
             docs[i] = doc
             i += 1
-    print "done."
+    print ("done.")
     return docs
 
 
@@ -69,7 +69,7 @@ class Corpus:
         self._i = 0
         self._data = loadDocs(path)
         self._D = len(self._data)
-        print "cache contains " + str(self._D) + " docs."
+        print ("cache contains " + str(self._D) + " docs.")
 
     def get_random_docs(self,n):
         """
@@ -87,4 +87,4 @@ if __name__ == '__main__':
         articles = wr.get_random_docs(10)
 
         t1 = time.time()
-        print 'took %f' % (t1 - t0)
+        print ('took %f' % (t1 - t0))

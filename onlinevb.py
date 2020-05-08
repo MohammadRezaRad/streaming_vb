@@ -21,15 +21,15 @@
 # Public License along with this program.
 # If not, see <http://www.gnu.org/licenses/>.
 
-import cPickle, string, numpy, getopt, sys, random, time, re, pprint
-
+import string, numpy, getopt, sys, random, time, re, pprint
+import _pickle as cPickle
 import onlineldavb, batchvb
 #import wikirandom
 import copy,math
 from multiprocessing import Pool
 def chunk(l, n):
     return [l[i:i+n] for i in range(0, len(l), n)]
-def getSuffStats((vocab, K, docs, alpha, lam)):
+def getSuffStats(vocab, K, docs, alpha, lam):
         batchVB = batchvb.BatchLDA(vocab, K, docs, alpha, lam)
         batchVB.set_lambda(copy.deepcopy(lam))
         return batchVB.do_e_step()
@@ -66,7 +66,7 @@ class OnlineVB:
     def updateEstimate(self,docs):
         #sizeOfChunks = int(math.ceil(len(docs)/float(self._numThreads)))
         #chunks = chunk(docs, sizeOfChunks)
-        estimates = [getSuffStats((self._vocab, self._K, docs, self._alpha, self._lambda))]#self._pool.map(runBatchVB, [ (self._vocab, self._K, docs, self._alpha, self._lambda) for docs in chunks])
+        estimates = [getSuffStats(self._vocab, self._K, docs, self._alpha, self._lambda)]#self._pool.map(runBatchVB, [ (self._vocab, self._K, docs, self._alpha, self._lambda) for docs in chunks])
         self._lambda = self._lambda + estimates[0] 
         return self._lambda
 

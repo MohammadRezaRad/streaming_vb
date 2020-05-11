@@ -32,7 +32,7 @@ import archived_dataset
 
 def parse_args():
     parser = OptionParser()
-    parser.set_defaults(K=100, D=-1, corpus = "nature", alpha = 1.0, eta = 1.0, batchsize=1024,
+    parser.set_defaults(K=15, D=-1, corpus = "nature", alpha = 1.0, eta = 1.0, batchsize=1024,
         async_batches_per_eval=5, 
         max_iters=100, threshold=1.0, numthreads=1, tau0=1.0, kappa=0.9, useHBBBound = True,
         minNumPtsPerEval = -1, expGrowthEval=1)
@@ -94,7 +94,7 @@ def main():
 
     # vocab file
     W = len(open(corpus + "_vocab.dat", 'r').readlines())
-
+    print(open(corpus + "_vocab.dat", 'r').readlines())
     # validation file
     validation_filename = corpus + "_test.dat"
 

@@ -26,25 +26,33 @@ import numpy as n
 
 def loadDocs(path):
     #do this using memory-mapped io. faster? think so.
+    print(path)
+    numLines = len(open(path, 'rb').readlines())
+    """
     print ("Loading docs ...")
     #get number of lines 
     numLines = 0
-    with open(path, "r+b") as f:
+    with open(path, "rb") as f:
         m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
-        while(m.readline() != ''):
-            numLines += 1
+        while(m.readline() != '!!!'):
+          #print(m.readline())
+          numLines += 1
+          #print (numLines)
+     """
     print (str(numLines) +" docs to load.")
     docs = numLines *[None]
+
     #read the docs in
-    with open(path, "r+b") as f:
+    with open(path, "rb") as f:
         m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
         i = 0;
         while(True):
             line = m.readline()
-            if line == '':
+            if line == '!!!':
                 break
             #print line
             line = line.rstrip().lstrip()
+            print(line)
             line = line[line.find(' ')+1:]
             split = line.split(" ")
             doc = (n.array([int(p.split(":")[0]) for p in split])

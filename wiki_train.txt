@@ -1,0 +1,7 @@
+10 rouse:5 uttering:2 succession:8 bacon:5
+10 rouse:5 uttering:2 succession:8 bacon:9
+10 rouse:5 uttering:2 succession:8 bacon:2
+10 rouse:5 uttering:2 succession:8 bacon:8
+10 rouse:5 uttering:2 succession:8 bacon:7
+10 rouse:5 uttering:2 succession:8 bacon:6
+10 rouse:5 uttering:2 succession:8 bacon:3

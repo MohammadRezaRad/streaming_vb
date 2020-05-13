@@ -32,8 +32,8 @@ import archived_dataset
 
 def parse_args():
     parser = OptionParser()
-    parser.set_defaults(K=15, D=-1, corpus = "nature", alpha = 1.0, eta = 1.0, batchsize=1024,
-        async_batches_per_eval=5, 
+    parser.set_defaults(K=3, D=-1, corpus = "nature", alpha = 1.0, eta = 1.0, batchsize=1024,
+        async_batches_per_eval=1, 
         max_iters=100, threshold=1.0, numthreads=1, tau0=1.0, kappa=0.9, useHBBBound = True,
         minNumPtsPerEval = -1, expGrowthEval=1)
 
@@ -94,7 +94,7 @@ def main():
 
     # vocab file
     W = len(open(corpus + "_vocab.dat", 'r').readlines())
-    print(open(corpus + "_vocab.dat", 'r').readlines())
+    #print(open(corpus + "_vocab.dat", 'r').readlines())
     # validation file
     validation_filename = corpus + "_test.dat"
 
@@ -114,7 +114,7 @@ def main():
 
     # number of documents
     trueD = wikirandom._D
-
+    
   
     if(algorithmname == "hbb"):
         if options.D == -1:
@@ -196,7 +196,8 @@ def main():
         if (corpus == "nature"):  # 351K docs
             minNumPtsPerEval = 512 #1e3
         elif (corpus == "wiki"):  # 3.6M docs
-            minNumPtsPerEval = 512 #1e3 #2e4
+            #minNumPtsPerEval = 512 #1e3 #2e4
+            minNumPtsPerEval = 2  # for toy wiki dataset
         else:
             minNumPtsPerEval = int(trueD / 1000)
 
@@ -205,6 +206,7 @@ def main():
     totalTime = 0.0
     totalDownloadingTime = 0.0
     iters = int(trueD / batchsize) + 1
+    #print(iters, batchsize, trueD)
     numPtsProc = 0  # number of points processed since last evaluation
     for iteration in range(iters):
         # Get some articles

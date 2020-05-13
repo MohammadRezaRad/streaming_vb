@@ -109,6 +109,7 @@ class BatchLDA:
         for d in range(0, self._D):
             # These are mostly just shorthand (but might help cache locality)
             ids = self._wordids[d]
+            print(ids)
             cts = self._wordcts[d]
             gammad = self._gamma[d, :]
             Elogthetad = Elogtheta[d, :]

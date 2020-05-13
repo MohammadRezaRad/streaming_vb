@@ -26,38 +26,37 @@ import numpy as n
 
 def loadDocs(path):
     #do this using memory-mapped io. faster? think so.
-    print(path)
-    numLines = len(open(path, 'rb').readlines())
-    """
+    #print(path)
+    #numLines = len(open(path, 'r+b').readlines())
+    
     print ("Loading docs ...")
     #get number of lines 
     numLines = 0
-    with open(path, "rb") as f:
-        m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
-        while(m.readline() != '!!!'):
-          #print(m.readline())
-          numLines += 1
-          #print (numLines)
-     """
+    with open(path, "r") as f:
+        #m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
+        #m=mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+        #while(m.readline() != tmp and numLines<20):
+        while(f.readline() != ''):
+            numLines += 1
+     
     print (str(numLines) +" docs to load.")
     docs = numLines *[None]
-
+    #print(docs)
     #read the docs in
-    with open(path, "rb") as f:
-        m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
+    with open(path, "r") as f:
+        #m=mmap.mmap(f.fileno(), 0, prot=mmap.PROT_READ)
         i = 0;
         while(True):
-            line = m.readline()
-            if line == '!!!':
+            line = f.readline()
+            if line == '':
                 break
-            #print line
             line = line.rstrip().lstrip()
-            print(line)
+            #print(line)
             line = line[line.find(' ')+1:]
             split = line.split(" ")
-            doc = (n.array([int(p.split(":")[0]) for p in split])
-            ,n.array([int(p.split(":")[1]) for p in split]))
-            #print doc
+            #print(split)
+            doc = (n.array([int(p.split(":")[0]) for p in split]),n.array([int(p.split(":")[1]) for p in split]))
+            #print(doc)
             #print 
             docs[i] = doc
             i += 1

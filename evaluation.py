@@ -51,7 +51,7 @@ def evaluateBeta(docs, lda_alpha, lda_beta):
     (wordids, wordcts) = (docs[docI][0], docs[docI][1])
     # (likelihood, gamma) = lda_e_step((wordids, wordcts), lda_alpha, k, lda_beta)
     # test_score += likelihood
-    (likelihood, count, gamma) = lda_e_step_split((wordids, wordcts), lda_alpha, k, lda_beta)
+    (likelihood, count, gamma) = lda_e_step_split(wordids, wordcts, lda_alpha, k, lda_beta)
     test_score_split += likelihood
     c_test_word_count_split += count
     numwords += sum(wordcts)
@@ -68,7 +68,7 @@ def evaluateLambda(docs, lda_alpha, lam):
     (wordids, wordcts) = (docs[docI][0], docs[docI][1])
     # (likelihood, gamma) = lda_e_step_full((wordids, wordcts), lda_alpha, k, lam)
     # test_score += likelihood
-    (likelihood, count, gamma) = lda_e_step_split_full((wordids, wordcts), lda_alpha, k, lam)
+    (likelihood, count, gamma) = lda_e_step_split_full(wordids, wordcts, lda_alpha, k, lam)
     test_score_split += likelihood
     c_test_word_count_split += count
     numwords += sum(wordcts)
